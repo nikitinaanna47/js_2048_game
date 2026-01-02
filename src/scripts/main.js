@@ -36,13 +36,25 @@ function renderBoard() {
       const tile = cells[index];
       const value = state[r][c];
 
-      tile.className = 'field-cell';
+      tile.textContent = '';
+
+      tile.classList.remove(
+        'field-cell--2',
+        'field-cell--4',
+        'field-cell--8',
+        'field-cell--16',
+        'field-cell--32',
+        'field-cell--64',
+        'field-cell--128',
+        'field-cell--256',
+        'field-cell--512',
+        'field-cell--1024',
+        'field-cell--2048',
+      );
 
       if (value !== 0) {
         tile.textContent = String(value);
         tile.classList.add(`field-cell--${value}`);
-      } else {
-        tile.textContent = '';
       }
     }
   }
