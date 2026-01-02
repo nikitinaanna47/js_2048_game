@@ -96,6 +96,11 @@ class Game {
         if (row[i] === row[i + 1]) {
           row[i] *= 2;
           this.score += row[i];
+
+          if (row[i] === 2048) {
+            this.status = 'win';
+          }
+
           row[i + 1] = 0;
           i++;
         }
@@ -106,13 +111,14 @@ class Game {
         row.push(0);
       }
 
-      if (!moved && row.some((v, idx) => v !== this.board[r][idx])) {
+      if (row.some((v, idx) => v !== this.board[r][idx])) {
         moved = true;
-        this.board[r] = row;
       }
+
+      this.board[r] = row;
     }
 
-    if (moved) {
+    if (moved && this.status === 'playing') {
       this._addRandomTile();
       this._checkLose();
     }
@@ -130,6 +136,11 @@ class Game {
         if (row[i] === row[i - 1]) {
           row[i] *= 2;
           this.score += row[i];
+
+          if (row[i] === 2048) {
+            this.status = 'win';
+          }
+
           row[i - 1] = 0;
           i--;
         }
@@ -140,13 +151,14 @@ class Game {
         row.unshift(0);
       }
 
-      if (!moved && row.some((v, idx) => v !== this.board[r][idx])) {
+      if (row.some((v, idx) => v !== this.board[r][idx])) {
         moved = true;
-        this.board[r] = row;
       }
+
+      this.board[r] = row;
     }
 
-    if (moved) {
+    if (moved && this.status === 'playing') {
       this._addRandomTile();
       this._checkLose();
     }
@@ -170,6 +182,10 @@ class Game {
         if (col[i] === col[i + 1]) {
           col[i] *= 2;
           this.score += col[i];
+
+          if (col[i] === 2048) {
+            this.status = 'win';
+          }
           col[i + 1] = 0;
           i++;
         }
@@ -189,7 +205,7 @@ class Game {
       }
     }
 
-    if (moved) {
+    if (moved && this.status === 'playing') {
       this._addRandomTile();
       this._checkLose();
     }
@@ -213,6 +229,10 @@ class Game {
         if (col[i] === col[i - 1]) {
           col[i] *= 2;
           this.score += col[i];
+
+          if (col[i] === 2048) {
+            this.ststus = 'win';
+          }
           col[i - 1] = 0;
           i--;
         }
@@ -232,7 +252,7 @@ class Game {
       }
     }
 
-    if (moved) {
+    if (moved && this.status === 'playing') {
       this._addRandomTile();
       this._checkLose();
     }
